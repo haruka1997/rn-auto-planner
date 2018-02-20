@@ -9,7 +9,7 @@ const styles = {
     bodyStyle: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: 'stretch',
     },
     textStyle: {
       color: 'white',

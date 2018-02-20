@@ -8,7 +8,7 @@ export default class NewTodoScreen extends Component {
   render() {
     return (
       <Container style={styles.containerStyle}>
-        <HeaderComponent title={"New Todo"} />
+        <HeaderComponent title={"New Todo"} navigation={this.props.navigation} />
         <Content>
           <Text>New Todo Screen</Text>
         </Content>

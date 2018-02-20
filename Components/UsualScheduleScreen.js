@@ -9,7 +9,7 @@ export default class UsualScheduleScreen extends Component {
   render() {
     return (
       <Container style={styles.containerStyle}>
-        <HeaderComponent title={"Usual"} />
+        <HeaderComponent title={"Usual"} navigation={this.props.navigation} />
         <Content>
           <Text>Usual Schedule Screen</Text>
         </Content>

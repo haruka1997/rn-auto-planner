@@ -8,7 +8,7 @@ export default class TodoDetailScreen extends Component {
   render() {
     return (
       <Container style={styles.containerStyle}>
-        <HeaderComponent title={"Detail"} />
+        <HeaderComponent title={"Detail"} navigation={this.props.navigation} />
         <Content>
           <Text>Detail Screen</Text>
         </Content>

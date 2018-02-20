@@ -1,21 +1,24 @@
+/**
+ * モジュールのインポート
+ */
+
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Container, Header, Content, Text } from 'native-base';
+import { DrawerNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
+import HomeScreen from './Components/HomeScreen';
+import NewTodoScreen from './Components/NewTodoScreen';
+import TodoDetailScreen from './Components/TodoDetailScreen';
+import UsualScheduleScreen from './Components/UsualScheduleScreen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+export default DrawerNavigator(
+  {
+    Home:    { screen: HomeScreen },
+    NewTodo: { screen: NewTodoScreen },
+    Detail:  { screen: TodoDetailScreen },
+    Usual:   { screen: UsualScheduleScreen },
   },
-});
+  {
+    initialRouteName: 'Home',
+  }
+);

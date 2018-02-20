@@ -6,10 +6,10 @@ import React, { Component } from 'react';
 import { Container, Header, Content, Text } from 'native-base';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
-import HomeScreen from './Components/HomeScreen';
-import NewTodoScreen from './Components/NewTodoScreen';
-import TodoDetailScreen from './Components/TodoDetailScreen';
-import UsualScheduleScreen from './Components/UsualScheduleScreen';
+import HomeScreen from './components/HomeScreen';
+import NewTodoScreen from './components/NewTodoScreen';
+import TodoDetailScreen from './components/TodoDetailScreen';
+import UsualScheduleScreen from './components/UsualScheduleScreen';
 
 const Drawer = DrawerNavigator(
   {

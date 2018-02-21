@@ -15,7 +15,7 @@ export default class HeaderComponent extends Component {
 
   render() {
     return (
-      <Header>
+      <Header style={styles.header.headerStyle}>
         <Left>
           <Button
             transparent

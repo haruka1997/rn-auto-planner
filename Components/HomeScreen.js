@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Header, Body, Content, Button, Text, Card, CardItem, Right } from 'native-base';
+import { Container, Header, Body, Content, Button, Text, Card, CardItem, Right, H1 } from 'native-base';
 import styles from '../style';
 
 import HeaderComponent from './utils/HeaderComponent';
-import dateFormatter from '../utils/dateFormatter';
+import {dateFormatter, timeFormatter} from '../utils/datetimeFormatter';
 
 // サンプルデータ
 import sampleTodos from '../sample/sampleTodos';
@@ -31,6 +31,7 @@ export default class HomeScreen extends Component {
       return dates;
     };
 
+    // 日付順に並び変える
     const distinctDates = extractDistinctDates(todos).sort();
 
     let todoCards = [];
@@ -39,19 +40,27 @@ export default class HomeScreen extends Component {
     for (let distinctDate of distinctDates) {
       // タイトル用の日付
       todoCards.push(
-        <Text key={key.toString()}>{dateFormatter(distinctDate)}</Text>
+        <Card key={(key++).toString()}>
+          <CardItem style={styles.home.cardHeaderStyle}>
+            <Body>
+              <Text style={styles.home.cardHeaderTextStyle}>
+                {dateFormatter(distinctDate)}
+              </Text>
+            </Body>
+          </CardItem>
+        </Card>
       );
-      key++;
 
       // タイトルに設定されている日付と同じ日付である
       // Todoをカードとして書き出す
       for (let todo of todos) {
         if (todo.date === distinctDate) {
           todoCards.push(
-            <Card key={key.toString()}>
+            <Card key={(key++).toString()} transparent >
               <CardItem header>
                 <Body>
                   <Text>{todo.title}</Text>
+                  <Text note>{timeFormatter(todo.time)}</Text>
                 </Body>
                 <Right>
                   <Text>{todo.genre}</Text>
@@ -64,7 +73,6 @@ export default class HomeScreen extends Component {
               </CardItem>
             </Card>
           );
-          key++;
         }
       }
     }
@@ -74,6 +82,7 @@ export default class HomeScreen extends Component {
 
   render() {
     const todoCards = this.convertTodosToCards(this.state.todos);
+
     return (
       <Container style={styles.containerStyle}>
         <HeaderComponent title={"Home"} navigation={this.props.navigation} />

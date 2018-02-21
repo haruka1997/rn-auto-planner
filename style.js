@@ -17,6 +17,16 @@ const styles = {
       fontSize: 24
     }
   },
+
+  home: {
+    cardHeaderStyle: {
+      backgroundColor: '#0f5ca0',
+    },
+    cardHeaderTextStyle: {
+      color: '#fff',
+      fontWeight: 'bold',
+    }
+  }
 }
 
 export default styles;

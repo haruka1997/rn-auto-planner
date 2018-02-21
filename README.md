@@ -9,14 +9,20 @@
 /
 ├─assets
 ├─components
+│  ├─Home
+│  ├─NewTodo
+│  ├─UsualSchedule
 │  └─utils
-├─sample
 ├─node_modules
+├─sample
+├──utils
 │
-├─App.js
-├─app.json
-├─style.js
+├──App.js
+├──app.json
 │
-└─package.json
+├──package.json
+│
+└──README.md
+
 
 ```

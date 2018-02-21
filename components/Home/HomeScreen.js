@@ -19,6 +19,10 @@ export default class HomeScreen extends Component {
     };
   }
 
+  // async componentWillMount() {
+  //   // TODO: AsyncStorageの処理
+  // }
+
   convertTodosToCards(todos) {
     // 重複を除きつつ日付を抽出する
     const extractDistinctDates = todos => {

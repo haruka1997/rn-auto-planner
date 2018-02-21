@@ -7,7 +7,7 @@
  *    desc: "Description of todo",
  *    genre: "Genre of todo",
  *    isCompleted: "Is this todo completed",
- *    created: "UNIX time when this todo created"
+ *    created: "UNIX time when this todo created (for identification)"
  * }
 */
 

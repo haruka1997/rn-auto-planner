@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Header, Body, Content, Button, Text, Card, CardItem, Right, H1 } from 'native-base';
-import styles from '../style';
+import { Container, Content } from 'native-base';
+import styles from '../../style';
 
-import HeaderComponent from './utils/HeaderComponent';
-import {dateFormatter, timeFormatter} from '../utils/datetimeFormatter';
+import HeaderComponent from '../utils/HeaderComponent';
+
+import CardHeader from './CardHeader';
+import TodoCard from './TodoCard';
 
 // サンプルデータ
-import sampleTodos from '../sample/sampleTodos';
+import sampleTodos from '../../sample/sampleTodos';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -39,40 +41,13 @@ export default class HomeScreen extends Component {
 
     for (let distinctDate of distinctDates) {
       // タイトル用の日付
-      todoCards.push(
-        <Card key={(key++).toString()}>
-          <CardItem style={styles.home.cardHeaderStyle}>
-            <Body>
-              <Text style={styles.home.cardHeaderTextStyle}>
-                {dateFormatter(distinctDate)}
-              </Text>
-            </Body>
-          </CardItem>
-        </Card>
-      );
+      todoCards.push(<CardHeader key={distinctDate} date={distinctDate} />);
 
       // タイトルに設定されている日付と同じ日付である
       // Todoをカードとして書き出す
       for (let todo of todos) {
         if (todo.date === distinctDate) {
-          todoCards.push(
-            <Card key={(key++).toString()} transparent >
-              <CardItem header>
-                <Body>
-                  <Text>{todo.title}</Text>
-                  <Text note>{timeFormatter(todo.time)}</Text>
-                </Body>
-                <Right>
-                  <Text>{todo.genre}</Text>
-                </Right>
-              </CardItem>
-              <CardItem>
-                <Body>
-                  <Text>{todo.desc}</Text>
-                </Body>
-              </CardItem>
-            </Card>
-          );
+          todoCards.push(<TodoCard key={todo.created.toString()} params={todo} />);
         }
       }
     }

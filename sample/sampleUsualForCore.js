@@ -42,7 +42,7 @@ const sampleUsual = {
   fri: [
     {
       start: "1400",
-      end: "1530"
+      end: "1800"
     },
     {
       start: "2000",

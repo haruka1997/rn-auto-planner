@@ -2,6 +2,7 @@
 const todos = require('../sample/sampleTodosForCore');
 const usuals = require('../sample/sampleUsualForCore');
 
+// 文字列strのindexに文字insertを挿入する
 const insertStr = (str, index, insert) => {
   return str.slice(0, index) + insert + str.slice(index, str.length);
 }
@@ -54,13 +55,50 @@ const getDurationMinute = (beginTimeString, endTimeString) => {
 
   if (beginMinute === endMinute) {
     return (endHour - beginHour) * 60;
-
   } else if (beginMinute < endMinute) {
     return (endHour - beginHour) * 60 + (endMinute - beginMinute);
-
   } else {
     return (60 - beginMinute) + (endMinute) + ((endHour - beginHour - 1) * 60);
   }
+}
+
+// 引数オブジェクトの日付を1日進める
+const advanceOneDay = dateObject => {
+  const isLeapYear = y => !(y % 4) && (y % 100) || !(y % 400)
+
+  dateObject.day++;
+
+  if (dateObject.month === 2 && dateObject.day === 29 && !isLeapYear(dateObject.year)) {
+    dateObject.mohth++;
+    dateObject.day = 1;
+    return dateObject;
+  }
+
+  if (dateObject.month === 2 && dateObject.day === 30) {
+    dateObject.month++;
+    dateObject.day = 1;
+    return dateObject;
+  }
+
+  if (dateObject.month in [1, 3, 5, 7, 8, 10, 12] && dateObject.day === 32) {
+    dateObject.month++;
+    dateObject.day = 1;
+
+    if (dateObject.month === 13) {
+      dateObject.year++;
+      dateObject.month = 1;
+    }
+
+    return dateObject
+  }
+
+  if (dateObject.month in [4, 6, 9, 11] && dateObject.day === 31) {
+    dateObject.month++;
+    dateObject.day = 1;
+    return dateObject;
+  }
+
+  return dateObject;
 }
 
 // ユーザ入力値のサンプル
@@ -94,9 +132,14 @@ const main = userInput => {
       }
     }
 
+    // Todoがセットされた時点でループを終える
     if (isSetTodo) {
       break;
     }
+
+    // 日付と曜日を1日進める
+    currentDateObject = advanceOneDay(currentDateObject);
+    currentWeekday = getWeekdayOfDateString(dateObjectToString(currentDateObject));
   }
 }
 

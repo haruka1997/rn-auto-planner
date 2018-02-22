@@ -70,4 +70,4 @@ const sampleTodos = [
   },
 ];
 
-export default sampleTodos;
+module.exports = sampleTodos;

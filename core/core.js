@@ -69,7 +69,7 @@ const advanceOneDay = dateObject => {
   dateObject.day++;
 
   if (dateObject.month === 2 && dateObject.day === 29 && !isLeapYear(dateObject.year)) {
-    dateObject.mohth++;
+    dateObject.month++;
     dateObject.day = 1;
     return dateObject;
   }
@@ -101,9 +101,24 @@ const advanceOneDay = dateObject => {
   return dateObject;
 }
 
+// 指定分数進める
+const advanceMinute = (dateString, advanceMinutes) => {
+  let hour = Number(dateString.substring(0, 2));
+  let minute = Number(dateString.substring(2, 4));
+
+  minute += advanceMinutes;
+
+  while (minute >= 60) {
+    hour++;
+    minute -= 60;
+  }
+
+  return ("00" + String(hour)).slice(-2) + ("00" + String(minute)).slice(-2)
+}
+
 // ユーザ入力値のサンプル
 const userInput = {
-  deadline: "20180224",
+  deadline: "20180411",
   durationMin: 120,
   title: "test todo",
   place: "somewhere",
@@ -116,26 +131,30 @@ const main = userInput => {
   let currentDateObject = getCurrentDateObject();
   let currentWeekday = getWeekdayOfDateString(dateObjectToString(currentDateObject));
 
-  let isSetTodo = false;
-
   while (true) {
     for (let usual of usuals[currentWeekday]) {
       if (getDurationMinute(usual.start, usual.end) >= userInput.durationMin) {
-        console.log(`${currentDateObject.year}年${currentDateObject.month}月${currentDateObject.day}日の`);
-        console.log(`${usual.start.substring(0, 2)}時${usual.start.substring(2, 4)}分から始めれば？`);
+        const date = dateObjectToString(currentDateObject);
+        const start = usual.start.substring(0, 2) + usual.start.substring(2, 4);
+        const end = advanceMinute(start, userInput.durationMin);
 
-        isSetTodo = true;
-        break;
+        return {
+          date: date,
+          start: start,
+          end: end,
+          title: userInput.title,
+          place: userInput.place,
+          desc: userInput.desc,
+          genre: userInput.genre,
+          isCompleted: false,
+          created: (new Date()).getTime()
+        };
       }
-    }
-
-    // Todoがセットされた時点でループを終える
-    if (isSetTodo) {
-      break;
     }
 
     // 締切日の時点でセットできていなければ終了
     if (dateObjectToString(currentDateObject) === userInput.deadline) {
+      console.error("Todoを設定することができません")
       return false;
     }
 
@@ -145,4 +164,4 @@ const main = userInput => {
   }
 }
 
-main(userInput);
+console.log(main(userInput));

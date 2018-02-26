@@ -119,10 +119,7 @@ const main = userInput => {
   let isSetTodo = false;
 
   while (true) {
-    let usualsOfCurrentWeekday = usuals[currentWeekday]
-
-    for (let usual of usualsOfCurrentWeekday) {
-
+    for (let usual of usuals[currentWeekday]) {
       if (getDurationMinute(usual.start, usual.end) >= userInput.durationMin) {
         console.log(`${currentDateObject.year}年${currentDateObject.month}月${currentDateObject.day}日の`);
         console.log(`${usual.start.substring(0, 2)}時${usual.start.substring(2, 4)}分から始めれば？`);
@@ -135,6 +132,11 @@ const main = userInput => {
     // Todoがセットされた時点でループを終える
     if (isSetTodo) {
       break;
+    }
+
+    // 締切日の時点でセットできていなければ終了
+    if (dateObjectToString(currentDateObject) === userInput.deadline) {
+      return false;
     }
 
     // 日付と曜日を1日進める

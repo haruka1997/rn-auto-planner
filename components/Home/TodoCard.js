@@ -15,7 +15,7 @@ export default class TodoCard extends Component {
         <CardItem header>
           <Body>
             <Text>{this.props.params.title}</Text>
-            <Text note>{timeFormatter(this.props.params.time)}</Text>
+            <Text note>{timeFormatter(this.props.params.start)}〜{timeFormatter(this.props.params.end)}</Text>
           </Body>
           <Right>
             <Text>{this.props.params.genre}</Text>

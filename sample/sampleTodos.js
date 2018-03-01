@@ -1,7 +1,8 @@
 /**
  * {
  *    date: "YYYYMMDD",
- *    time: "HHMM",
+ *    start: "HHMM",
+ *    end: "HHMM",
  *    title: "Title of todo",
  *    place: "Where to do",
  *    desc: "Description of todo",
@@ -14,7 +15,8 @@
 const sampleTodos = [
   {
     date: "20180221",
-    time: "1500",
+    start: "1500",
+    end: "1600",
     title: "Shopping",
     place: "Station",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -24,7 +26,8 @@ const sampleTodos = [
   },
   {
     date: "20180221",
-    time: "1500",
+    start: "1800",
+    end: "1900",
     title: "Homework",
     place: "School",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -34,7 +37,8 @@ const sampleTodos = [
   },
   {
     date: "20180222",
-    time: "1500",
+    start: "1300",
+    end: "1400",
     title: "Shopping",
     place: "Station",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -44,7 +48,8 @@ const sampleTodos = [
   },
   {
     date: "20180222",
-    time: "1500",
+    start: "1500",
+    end: "1600",
     title: "Send email",
     place: "company",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -54,7 +59,8 @@ const sampleTodos = [
   },
   {
     date: "20180222",
-    time: "1500",
+    start: "1600",
+    end: "1700",
     title: "Sleep",
     place: "Home",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

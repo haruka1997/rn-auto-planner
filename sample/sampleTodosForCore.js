@@ -70,8 +70,8 @@ const sampleTodos = [
   },
   {
     date: "20180302",
-    start: "1400",
-    end: "1700",
+    start: "1330",
+    end: "1510",
     title: "Sleep",
     place: "Home",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

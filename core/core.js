@@ -116,6 +116,9 @@ const advanceMinute = (dateString, advanceMinutes) => {
   return ("00" + String(hour)).slice(-2) + ("00" + String(minute)).slice(-2)
 }
 
+// 日付dateStrのtodoを全て抽出し，
+// 競合を調査することによって
+// 最終的なstartTimeを決定する
 const searchFreeTimeStart = (startTime, dateStr) => {
   let targetDateTodos = [];
 
@@ -128,7 +131,7 @@ const searchFreeTimeStart = (startTime, dateStr) => {
 
   let index = 0;
   while (index < targetDateTodos.length) {
-    if (targetDateTodos[index].start === startTime) {
+    if (targetDateTodos[index].start <= startTime && startTime < targetDateTodos[index].end) {
       startTime = targetDateTodos[index].end;
       index = 0;
     } else {
@@ -175,8 +178,9 @@ const main = userInput => {
 
     // 締切日の時点でセットできていなければ終了
     if (dateObjectToString(currentDateObject) === userInput.deadline) {
-      console.error("Todoを設定することができません")
-      return false;
+      return {
+        message: "There is no space to insert your todo"
+      };
     }
 
     // 日付と曜日を1日進める
@@ -190,7 +194,7 @@ const main = userInput => {
 // ユーザ入力値のサンプル
 const userInput = {
   deadline: "20180307",
-  durationMin: 120,
+  durationMin: 75,
   title: "test todo",
   place: "somewhere",
   desc: "this is test todo",

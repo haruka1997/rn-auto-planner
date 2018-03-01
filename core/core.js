@@ -142,13 +142,12 @@ const searchFreeTimeStart = (startTime, dateStr) => {
   return startTime;
 }
 
-const main = userInput => {
+const recommender = userInput => {
   // プログラム実行時点での日付のオブジェクトと曜日を取得する
   let currentDateObject = getCurrentDateObject();
   let currentWeekday = getWeekdayOfDateString(dateObjectToString(currentDateObject));
 
   while (true) {
-
     for (let usual of usuals[currentWeekday]) {
 
       // Todoを設定できる空き時間を発見した際に，Todoオブジェクトを返却する
@@ -189,6 +188,8 @@ const main = userInput => {
   }
 }
 
+export default recommender;
+
 ////////////////////////////////////////////////////////////////////////////////////
 
 // ユーザ入力値のサンプル
@@ -200,5 +201,3 @@ const userInput = {
   desc: "this is test todo",
   genre: "foobar"
 };
-
-console.log(main(userInput));

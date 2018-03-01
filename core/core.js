@@ -116,15 +116,28 @@ const advanceMinute = (dateString, advanceMinutes) => {
   return ("00" + String(hour)).slice(-2) + ("00" + String(minute)).slice(-2)
 }
 
-// ユーザ入力値のサンプル
-const userInput = {
-  deadline: "20180411",
-  durationMin: 120,
-  title: "test todo",
-  place: "somewhere",
-  desc: "this is test todo",
-  genre: "foobar"
-};
+const searchFreeTimeStart = (startTime, dateStr) => {
+  let targetDateTodos = [];
+
+  // 対象日のTodoを抽出
+  for (let todo of todos) {
+    if (todo.date === dateStr) {
+      targetDateTodos.push(todo);
+    }
+  }
+
+  let index = 0;
+  while (index < targetDateTodos.length) {
+    if (targetDateTodos[index].start === startTime) {
+      startTime = targetDateTodos[index].end;
+      index = 0;
+    } else {
+      index++;
+    }
+  }
+
+  return startTime;
+}
 
 const main = userInput => {
   // プログラム実行時点での日付のオブジェクトと曜日を取得する
@@ -132,15 +145,23 @@ const main = userInput => {
   let currentWeekday = getWeekdayOfDateString(dateObjectToString(currentDateObject));
 
   while (true) {
+
     for (let usual of usuals[currentWeekday]) {
-      if (getDurationMinute(usual.start, usual.end) >= userInput.durationMin) {
-        const date = dateObjectToString(currentDateObject);
-        const start = usual.start.substring(0, 2) + usual.start.substring(2, 4);
-        const end = advanceMinute(start, userInput.durationMin);
+
+      // Todoを設定できる空き時間を発見した際に，Todoオブジェクトを返却する
+      const dateStr = dateObjectToString(currentDateObject);
+
+      // 探索対象の空き時間にTodoがセットされていた場合
+      // それらの内，最後に終了するTodoの終了時刻と
+      // 空き時間の終了時刻の間の時間がdurationMinより長ければ予定を入れられる
+      const startTime = searchFreeTimeStart(usual.start, dateStr);
+
+      if (getDurationMinute(startTime, usual.end) >= userInput.durationMin) {
+        const end = advanceMinute(startTime, userInput.durationMin);
 
         return {
-          date: date,
-          start: start,
+          date: dateStr,
+          start: startTime,
           end: end,
           title: userInput.title,
           place: userInput.place,
@@ -163,5 +184,17 @@ const main = userInput => {
     currentWeekday = getWeekdayOfDateString(dateObjectToString(currentDateObject));
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// ユーザ入力値のサンプル
+const userInput = {
+  deadline: "20180307",
+  durationMin: 120,
+  title: "test todo",
+  place: "somewhere",
+  desc: "this is test todo",
+  genre: "foobar"
+};
 
 console.log(main(userInput));

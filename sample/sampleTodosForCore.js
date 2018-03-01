@@ -68,6 +68,17 @@ const sampleTodos = [
     isCompleted: false,
     created: 5555555555
   },
+  {
+    date: "20180302",
+    start: "1400",
+    end: "1700",
+    title: "Sleep",
+    place: "Home",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    genre: "private",
+    isCompleted: false,
+    created: 5555555555
+  },
 ];
 
 module.exports = sampleTodos;
